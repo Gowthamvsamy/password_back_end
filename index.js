@@ -19,6 +19,9 @@ createDbConnection()
 //create express API_SERVER
 const API_SERVER = express();
 
+//Environment variables
+require('dotenv').config();
+
 //passing incoming request body as a json
 API_SERVER.use(cors());
 API_SERVER.use(express.json());
@@ -35,8 +38,8 @@ API_SERVER.use('/emailVerification', forgotController)
 API_SERVER.use('/changepassword', changeController)
 
 //start and listen to the server
-API_SERVER.listen(3000, 'localhost', () => {
+API_SERVER.listen(process.env.PORT, process.env.HOSTNAME, () => {
     console.log('Server started on port 3000');
-    console.log("http://localhost:3000");
+    console.log(`http://${process.env.HOSTNAME}:${process.env.PORT}`);
 });
 
